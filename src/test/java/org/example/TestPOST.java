@@ -1,19 +1,31 @@
 package org.example;
 
 import io.restassured.http.ContentType;
+import org.apache.http.HttpStatus;
+import org.example.util.TestConstants;
 import org.json.simple.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 
 public class TestPOST {
-    @Test
-    public void test_01_post()  {
 
-        JSONObject request = new JSONObject();
+    private JSONObject request;
+
+    @BeforeClass
+    public void setup(){
+
+        request = new JSONObject();
 
         request.put("name", "Raghav");
         request.put("job", "Teacher");
+
+    }
+
+    @Test(testName = "Teste post url users retorno 200")
+    public void test_01_post()  {
 
         System.out.println(request);
         System.out.println(request.toJSONString());
@@ -24,20 +36,15 @@ public class TestPOST {
                 .accept(ContentType.JSON)
             .body(request.toJSONString())
         .when()
-            .post("https://reqres.in/api/users")
+            .post(TestConstants.DEFAULT_URL)
         .then()
-            .statusCode(201);
+            .statusCode(HttpStatus.SC_CREATED);
 
     }
 
     @Test
     public void test_02_put()  {
 
-        JSONObject request = new JSONObject();
-
-        request.put("name", "Raghav");
-        request.put("job", "Teacher");
-
         System.out.println(request);
         System.out.println(request.toJSONString());
 
@@ -47,7 +54,7 @@ public class TestPOST {
                 .accept(ContentType.JSON)
             .body(request.toJSONString())
         .when()
-                .put("https://reqres.in/api/users/2")
+                .put(TestConstants.DEFAULT_URL+"/2")
         .then()
                 .statusCode(200)
                 .log().all();
@@ -57,11 +64,6 @@ public class TestPOST {
     @Test
     public void test_03_patch()  {
 
-        JSONObject request = new JSONObject();
-
-        request.put("name", "Raghav");
-        request.put("job", "Teacher");
-
         System.out.println(request);
         System.out.println(request.toJSONString());
 
@@ -71,7 +73,7 @@ public class TestPOST {
                 .accept(ContentType.JSON)
             .body(request.toJSONString())
         .when()
-                .patch("https://reqres.in/api/users/2")
+                .patch(TestConstants.DEFAULT_URL+"/2")
         .then()
                 .statusCode(200)
                 .log().all();
@@ -82,7 +84,7 @@ public class TestPOST {
     public void test_04_delete()  {
 
        when()
-            .patch("https://reqres.in/api/users/2")
+            .patch(TestConstants.DEFAULT_URL+"/2")
        .then()
             .statusCode(200)
             .log().all();
