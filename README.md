@@ -33,3 +33,4 @@ Project created to study REST API.
 
 * https://springdoc.org/#swagger-ui-properties
 * https://docs.spring.io/spring-security/reference/reactive/authorization/authorize-http-requests.html
+* https://www.toolsqa.com/
