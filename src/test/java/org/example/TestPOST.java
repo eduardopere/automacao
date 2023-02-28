@@ -24,7 +24,8 @@ public class TestPOST {
 
     }
 
-    @Test(testName = "Teste post url users retorno 200")
+    @Test(testName = "Teste post url users retorno 201")
+
     public void test_01_post()  {
 
         System.out.println(request);
@@ -42,7 +43,8 @@ public class TestPOST {
 
     }
 
-    @Test
+    @Test(testName = "Teste put url users retorno 200")
+
     public void test_02_put()  {
 
         System.out.println(request);
@@ -56,12 +58,13 @@ public class TestPOST {
         .when()
                 .put(TestConstants.DEFAULT_URL+"/2")
         .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .log().all();
 
     }
 
-    @Test
+    @Test(testName = "Teste patch url users retorno 200")
+
     public void test_03_patch()  {
 
         System.out.println(request);
@@ -75,18 +78,18 @@ public class TestPOST {
         .when()
                 .patch(TestConstants.DEFAULT_URL+"/2")
         .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .log().all();
 
     }
 
-    @Test
+    @Test(testName = "Teste delete url users retorno 204")
     public void test_04_delete()  {
 
        when()
-            .patch(TestConstants.DEFAULT_URL+"/2")
+            .delete(TestConstants.DEFAULT_URL+"/2")
        .then()
-            .statusCode(200)
+            .statusCode(HttpStatus.SC_NO_CONTENT)
             .log().all();
 
     }
